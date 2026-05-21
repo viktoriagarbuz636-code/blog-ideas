@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import styles from './EditIdeaPage.module.css';
+
 function EditIdeaPage() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -10,6 +12,8 @@ function EditIdeaPage() {
   const [description, setDescription] = useState('');
 
   const [loading, setLoading] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -33,6 +37,7 @@ function EditIdeaPage() {
       setDescription(data.description);
     } catch (err) {
       console.error(err);
+
       setError('Ошибка загрузки идеи');
     } finally {
       setLoading(false);
@@ -43,7 +48,7 @@ function EditIdeaPage() {
     e.preventDefault();
 
     try {
-      setLoading(true);
+      setIsSubmitting(true);
       setError('');
 
       const response = await fetch(`http://localhost:3001/ideas/${id}`, {
@@ -65,77 +70,78 @@ function EditIdeaPage() {
       navigate('/gallery');
     } catch (err) {
       console.error(err);
+
       setError('Не удалось обновить идею');
     } finally {
-      setLoading(false);
+      setIsSubmitting(false);
     }
   };
 
   if (loading) {
-    return <div style={{ padding: '20px' }}>Загрузка...</div>;
-  }
-
-  if (error) {
-    return <div style={{ padding: '20px', color: 'red' }}>{error}</div>;
+    return <div className={styles.loading}>⏳ Загрузка идеи...</div>;
   }
 
   return (
-    <div
-      style={{
-        maxWidth: '600px',
-        margin: '40px auto',
-        padding: '20px',
-      }}
-    >
-      <h1>Редактирование идеи #{id}</h1>
+    <div className={styles.container}>
+      <h1 className={styles.title}>✏️ Редактирование идеи</h1>
+
+      <p className={styles.subtitle}>ID идеи: {id}</p>
+
+      {error && <div className={styles.error}>❌ {error}</div>}
 
       <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: '16px' }}>
-          <label>Никнейм:</label>
+        <div className={styles.formGroup}>
+          <label className={styles.label}>Никнейм</label>
 
           <input
             type="text"
             value={nick}
             onChange={(e) => setNick(e.target.value)}
-            style={{
-              width: '100%',
-              padding: '10px',
-              marginTop: '8px',
-            }}
+            required
+            disabled={isSubmitting}
+            className={styles.input}
           />
         </div>
 
-        <div style={{ marginBottom: '16px' }}>
-          <label>Название:</label>
+        <div className={styles.formGroup}>
+          <label className={styles.label}>Название идеи</label>
 
           <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            style={{
-              width: '100%',
-              padding: '10px',
-              marginTop: '8px',
-            }}
+            required
+            disabled={isSubmitting}
+            className={styles.input}
           />
         </div>
 
-        <div style={{ marginBottom: '16px' }}>
-          <label>Описание:</label>
+        <div className={styles.formGroup}>
+          <label className={styles.label}>Описание</label>
 
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            rows={4}
-            style={{
-              width: '100%',
-              padding: '10px',
-              marginTop: '8px',
-            }}
+            required
+            rows={5}
+            disabled={isSubmitting}
+            className={styles.textarea}
           />
         </div>
 
-        <button type="submit">Сохранить изменения</button>
+        <div className={styles.actions}>
+          <button type="submit" disabled={isSubmitting} className={styles.saveButton}>
+            {isSubmitting ? '⏳ Сохранение...' : '💾 Сохранить'}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => navigate('/gallery')}
+            className={styles.cancelButton}
+          >
+            ↩️ Отмена
+          </button>
+        </div>
       </form>
     </div>
   );

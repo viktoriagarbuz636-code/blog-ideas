@@ -1,0 +1,221 @@
+.container {
+  max-width: 650px;
+
+  margin: 40px auto;
+
+  padding: 32px;
+
+  background-color: white;
+
+  border-radius: 18px;
+
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.title {
+  text-align: center;
+
+  margin-bottom: 10px;
+
+  color: #282c34;
+
+  font-size: 2rem;
+}
+
+.subtitle {
+  text-align: center;
+
+  color: #777;
+
+  margin-bottom: 30px;
+}
+
+.loading {
+  text-align: center;
+
+  padding: 50px;
+
+  font-size: 1.2rem;
+
+  color: #666;
+}
+
+.error {
+  background-color: #f8d7da;
+
+  color: #842029;
+
+  padding: 14px;
+
+  border-radius: 8px;
+
+  margin-bottom: 20px;
+}
+
+.formGroup {
+  margin-bottom: 22px;
+}
+
+.label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-weight: bold;
+
+  color: #333;
+}
+
+.input {
+  width: 100%;
+
+  padding: 14px;
+
+  border: 1px solid #ccc;
+
+  border-radius: 10px;
+
+  font-size: 16px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+
+  box-sizing: border-box;
+}
+
+.input:focus {
+  outline: none;
+
+  border-color: #ffc107;
+
+  box-shadow: 0 0 0 4px rgba(255, 193, 7, 0.2);
+}
+
+.input:disabled {
+  background-color: #f1f1f1;
+
+  cursor: not-allowed;
+}
+
+.textarea {
+  width: 100%;
+
+  padding: 14px;
+
+  border: 1px solid #ccc;
+
+  border-radius: 10px;
+
+  font-size: 16px;
+
+  font-family: inherit;
+
+  resize: vertical;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+
+  box-sizing: border-box;
+}
+
+.textarea:focus {
+  outline: none;
+
+  border-color: #ffc107;
+
+  box-shadow: 0 0 0 4px rgba(255, 193, 7, 0.2);
+}
+
+.textarea:disabled {
+  background-color: #f1f1f1;
+
+  cursor: not-allowed;
+}
+
+.actions {
+  display: flex;
+
+  gap: 14px;
+
+  margin-top: 30px;
+}
+
+.saveButton {
+  flex: 1;
+
+  background-color: #ffc107;
+
+  color: #282c34;
+
+  border: none;
+
+  padding: 14px;
+
+  border-radius: 10px;
+
+  font-size: 16px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.saveButton:hover:not(:disabled) {
+  background-color: #e0a800;
+
+  transform: scale(1.02);
+}
+
+.saveButton:disabled {
+  background-color: #ddd;
+
+  cursor: not-allowed;
+}
+
+.cancelButton {
+  flex: 1;
+
+  background-color: #6c757d;
+
+  color: white;
+
+  border: none;
+
+  padding: 14px;
+
+  border-radius: 10px;
+
+  font-size: 16px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: background-color 0.2s ease;
+}
+
+.cancelButton:hover {
+  background-color: #5a6268;
+}
+
+@media (max-width: 700px) {
+  .container {
+    margin: 20px;
+
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+}

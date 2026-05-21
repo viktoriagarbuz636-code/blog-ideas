@@ -1,52 +1,31 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import styles from './Header.module.css';
 
 export function Header() {
+  const location = useLocation();
+
+  const getLinkClass = (path: string) => {
+    return location.pathname === path ? `${styles.link} ${styles.linkActive}` : styles.link;
+  };
+
   return (
-    <header
-      style={{
-        backgroundColor: '#282c34',
-        padding: '10px 20px',
-        marginBottom: '20px',
-      }}
-    >
-      <nav>
-        <Link
-          to="/"
-          style={{
-            color: 'white',
-            marginRight: '20px',
-            textDecoration: 'none',
-          }}
-        >
+    <header className={styles.header}>
+      <nav className={styles.nav}>
+        <span className={styles.brand}>Блог Идей</span>
+
+        <Link to="/" className={getLinkClass('/')}>
           Главная
         </Link>
-        <Link
-          to="/gallery"
-          style={{
-            color: 'white',
-            marginRight: '20px',
-            textDecoration: 'none',
-          }}
-        >
+
+        <Link to="/gallery" className={getLinkClass('/gallery')}>
           Галерея идей
         </Link>
-        <Link
-          to="/add"
-          style={{
-            color: 'white',
-            marginRight: '20px',
-            textDecoration: 'none',
-          }}
-        >
+
+        <Link to="/add" className={getLinkClass('/add')}>
           Добавить идею
         </Link>
-        <Link
-          to="/contacts"
-          style={{
-            color: 'white',
-            textDecoration: 'none',
-          }}
-        >
+
+        <Link to="/contacts" className={getLinkClass('/contacts')}>
           Контакты
         </Link>
       </nav>

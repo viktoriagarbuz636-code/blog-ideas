@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import styles from './AddIdeaPage.module.css';
 
 function AddIdeaPage() {
   const [nick, setNick] = useState('');
@@ -34,11 +35,10 @@ function AddIdeaPage() {
         throw new Error('Ошибка создания идеи');
       }
 
-      await response.json();
-
       navigate('/gallery');
     } catch (err) {
       console.error(err);
+
       setError('Не удалось создать идею');
     } finally {
       setLoading(false);
@@ -46,84 +46,56 @@ function AddIdeaPage() {
   };
 
   return (
-    <div
-      style={{
-        maxWidth: '600px',
-        margin: '40px auto',
-        padding: '20px',
-      }}
-    >
-      <h1>Добавить новую идею</h1>
+    <div className={styles.container}>
+      <h1 className={styles.title}>✨ Добавить новую идею</h1>
 
-      {error && (
-        <div
-          style={{
-            color: 'red',
-            marginBottom: '16px',
-          }}
-        >
-          {error}
-        </div>
-      )}
+      {error && <div className={styles.error}>❌ {error}</div>}
 
       <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: '16px' }}>
-          <label>Ваш никнейм:</label>
+        <div className={styles.formGroup}>
+          <label className={styles.label}>Ваш никнейм</label>
 
           <input
             type="text"
             value={nick}
             onChange={(e) => setNick(e.target.value)}
             required
-            style={{
-              width: '100%',
-              padding: '10px',
-              marginTop: '8px',
-            }}
+            disabled={loading}
+            className={styles.input}
+            placeholder="Например: VictoriaDev"
           />
         </div>
 
-        <div style={{ marginBottom: '16px' }}>
-          <label>Название идеи:</label>
+        <div className={styles.formGroup}>
+          <label className={styles.label}>Название идеи</label>
 
           <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
-            style={{
-              width: '100%',
-              padding: '10px',
-              marginTop: '8px',
-            }}
+            disabled={loading}
+            className={styles.input}
+            placeholder="Краткое название идеи"
           />
         </div>
 
-        <div style={{ marginBottom: '16px' }}>
-          <label>Описание:</label>
+        <div className={styles.formGroup}>
+          <label className={styles.label}>Описание идеи</label>
 
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             required
-            rows={4}
-            style={{
-              width: '100%',
-              padding: '10px',
-              marginTop: '8px',
-            }}
+            rows={5}
+            disabled={loading}
+            className={styles.textarea}
+            placeholder="Подробно расскажите о своей идее..."
           />
         </div>
 
-        <button
-          type="submit"
-          disabled={loading}
-          style={{
-            padding: '10px 20px',
-            cursor: 'pointer',
-          }}
-        >
-          {loading ? 'Создание...' : 'Опубликовать идею'}
+        <button type="submit" disabled={loading} className={styles.submitButton}>
+          {loading ? '⏳ Отправка...' : '🚀 Опубликовать идею'}
         </button>
       </form>
     </div>

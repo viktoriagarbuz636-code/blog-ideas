@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { Idea } from '../types';
+import styles from './GalleryPage.module.css';
 
 function GalleryPage() {
   const [ideas, setIdeas] = useState<Idea[]>([]);
@@ -22,22 +23,16 @@ function GalleryPage() {
       }
 
       const data = await response.json();
+
       setIdeas(data);
     } catch (err) {
       console.error(err);
+
       setError('Не удалось загрузить идеи');
     } finally {
       setLoading(false);
     }
   };
-
-  if (loading) {
-    return <div style={{ padding: '20px' }}>Загрузка идей...</div>;
-  }
-
-  if (error) {
-    return <div style={{ padding: '20px', color: 'red' }}>{error}</div>;
-  }
 
   const handleDelete = async (id: number) => {
     const confirmed = window.confirm('Вы уверены, что хотите удалить идею?');
@@ -58,53 +53,44 @@ function GalleryPage() {
       setIdeas((prevIdeas) => prevIdeas.filter((idea) => idea.id !== id));
     } catch (err) {
       console.error(err);
+
       alert('Не удалось удалить идею');
     }
   };
 
+  if (loading) {
+    return <div className={styles.empty}>⏳ Загрузка идей...</div>;
+  }
+
+  if (error) {
+    return <div className={styles.empty}>❌ {error}</div>;
+  }
+
   return (
-    <div style={{ padding: '20px' }}>
-      <h1>Галерея идей</h1>
+    <div className={styles.container}>
+      <h1 className={styles.title}>💡 Галерея идей</h1>
 
       {ideas.length === 0 ? (
-        <p>Пока нет идей</p>
+        <p className={styles.empty}>Пока нет идей. Будьте первым, кто добавит идею!</p>
       ) : (
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '20px',
-          }}
-        >
+        <div className={styles.grid}>
           {ideas.map((idea) => (
-            <div
-              key={idea.id}
-              style={{
-                border: '1px solid #ccc',
-                borderRadius: '8px',
-                padding: '16px',
-                width: '300px',
-              }}
-            >
-              <h3>{idea.name}</h3>
+            <div key={idea.id} className={styles.card}>
+              <h2 className={styles.ideaTitle}>💡 {idea.name}</h2>
 
-              <p>
-                <strong>Автор:</strong> {idea.nick}
-              </p>
+              <p className={styles.author}>👤 Автор: {idea.nick}</p>
 
-              <p>{idea.description}</p>
+              <p className={styles.description}>{idea.description}</p>
 
-              <Link to={`/edit/${idea.id}`}>
-                <button>Редактировать</button>
-                <button
-                  onClick={() => handleDelete(idea.id)}
-                  style={{
-                    marginLeft: '10px',
-                  }}
-                >
-                  Удалить
+              <div className={styles.buttonGroup}>
+                <Link to={`/edit/${idea.id}`} className={styles.editButton}>
+                  ✏️ Редактировать
+                </Link>
+
+                <button onClick={() => handleDelete(idea.id)} className={styles.deleteButton}>
+                  🗑️ Удалить
                 </button>
-              </Link>
+              </div>
             </div>
           ))}
         </div>

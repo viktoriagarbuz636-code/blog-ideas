@@ -1,0 +1,172 @@
+.container {
+  max-width: 650px;
+
+  margin: 40px auto;
+
+  padding: 32px;
+
+  background-color: white;
+
+  border-radius: 18px;
+
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.title {
+  text-align: center;
+
+  margin-bottom: 30px;
+
+  color: #282c34;
+
+  font-size: 2rem;
+}
+
+.error {
+  background-color: #f8d7da;
+
+  color: #842029;
+
+  padding: 14px;
+
+  border-radius: 8px;
+
+  margin-bottom: 20px;
+}
+
+.formGroup {
+  margin-bottom: 22px;
+}
+
+.label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-weight: bold;
+
+  color: #333;
+}
+
+.input {
+  width: 100%;
+
+  padding: 14px;
+
+  border: 1px solid #ccc;
+
+  border-radius: 10px;
+
+  font-size: 16px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+
+  box-sizing: border-box;
+}
+
+.input:focus {
+  outline: none;
+
+  border-color: #007bff;
+
+  box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.12);
+}
+
+.input:disabled {
+  background-color: #f1f1f1;
+
+  cursor: not-allowed;
+}
+
+.textarea {
+  width: 100%;
+
+  padding: 14px;
+
+  border: 1px solid #ccc;
+
+  border-radius: 10px;
+
+  font-size: 16px;
+
+  font-family: inherit;
+
+  resize: vertical;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+
+  box-sizing: border-box;
+}
+
+.textarea:focus {
+  outline: none;
+
+  border-color: #007bff;
+
+  box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.12);
+}
+
+.textarea:disabled {
+  background-color: #f1f1f1;
+
+  cursor: not-allowed;
+}
+
+.submitButton {
+  width: 100%;
+
+  border: none;
+
+  background-color: #28a745;
+
+  color: white;
+
+  padding: 14px;
+
+  border-radius: 10px;
+
+  font-size: 18px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.submitButton:hover:not(:disabled) {
+  background-color: #218838;
+
+  transform: scale(1.02);
+}
+
+.submitButton:disabled {
+  background-color: #7a7a7a;
+
+  cursor: not-allowed;
+
+  opacity: 0.8;
+}
+
+@media (max-width: 700px) {
+  .container {
+    margin: 20px;
+
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 1.6rem;
+  }
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: #999;
+}

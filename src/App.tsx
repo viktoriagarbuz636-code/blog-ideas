@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage';
 import GalleryPage from './pages/GalleryPage';
 import AddIdeaPage from './pages/AddIdeaPage';
 import EditIdeaPage from './pages/EditIdeaPage';
+import ContactsPage from './pages/ContactsPage';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/gallery" element={<GalleryPage />} />
         <Route path="/add" element={<AddIdeaPage />} />
         <Route path="/edit/:id" element={<EditIdeaPage />} />
+        <Route path="/contacts" element={<ContactsPage />} />
       </Routes>
     </BrowserRouter>
   );

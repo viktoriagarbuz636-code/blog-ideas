@@ -30,8 +30,24 @@ export function Header() {
         >
           Галерея идей
         </Link>
-        <Link to="/add" style={{ color: 'white', textDecoration: 'none' }}>
+        <Link
+          to="/add"
+          style={{
+            color: 'white',
+            marginRight: '20px',
+            textDecoration: 'none',
+          }}
+        >
           Добавить идею
+        </Link>
+        <Link
+          to="/contacts"
+          style={{
+            color: 'white',
+            textDecoration: 'none',
+          }}
+        >
+          Контакты
         </Link>
       </nav>
     </header>
